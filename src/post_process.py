@@ -1,8 +1,11 @@
 '''
 Created on 19 Sep 2016
 
-@author: DefaultUser
+@author: Christos
 '''
 
-if __name__ == '__main__':
+def test1():
     pass
+
+if __name__ == '__main__':
+    test1()
