@@ -9,18 +9,27 @@ import matplotlib.pyplot as plt
 class Visualiser(object):
     
     __data = None
+    __filename_to_plot = None
+    __name = None
+    __figure_number = None
+    __figure = None
     
-    def __init__(self):
-        pass
+    def __init__(self, filename_to_plot, name, figure_number):
+        self.__filename_to_plot = filename_to_plot
+        self.__name = name
+        self.__figure_number = figure_number
+   
+        
 
-    def load_file_to_data_structure(self, filename):
+
+    def load_file_to_data_structure(self):
         '''
         expects data with 3 columns, where 
             the first column is the number of variables
             the second column is the time the optimisation run
             the third column is the Hypervolume indicator (calculated from 20,20)
         '''
-        with open(filename) as in_file:
+        with open(self.__filename_to_plot) as in_file:
             lines = [line.rstrip('\n') for line in in_file]
             if lines[0].startswith("#"):
                 lines.pop(0)
@@ -40,45 +49,53 @@ class Visualiser(object):
             
 
             
-    def plot_data(self):
+    def plot_two_axis_of_the_same_case(self):
         number_of_variables = self.__data[:,0]
         time_performance = self.__data[:,1]
-        HV_performance = self.__data[:,2]
+        HV_performance = self.__data[:,2]       
         
-        
-        
+        plt.figure(self.__figure_number)
         fig, ax1 = plt.subplots()
         
-        ax1.set_title('Scalability')
+        ax1.set_title('Scalability of '+self.__name)
         ax1.semilogx(number_of_variables, time_performance, '.')
         ax1.set_xlabel('Number of variables')
         
         # Make the time_performance-axis label and tick labels match the line color.
         ax1.set_ylabel('Time(s)', color='b')
         for tl in ax1.get_yticklabels():
-            tl.set_color('b')
+            tl.set_color('b')        
         
-        
-        ax2 = ax1.twinx()
-       
+        ax2 = ax1.twinx()       
         ax2.semilogx(number_of_variables, HV_performance, '*')
         ax2.set_ylabel('HV indicator', color='r')
         for tl in ax2.get_yticklabels():
             tl.set_color('r')
-        plt.show()
 
-#         plt.semilogx(number_of_variables,time_performance,'.' )
-#         plt.xlabel('Number of variables')
-#         plt.ylabel('Time(s)')
-#         plt.grid(True)
-#         plt.show()
-    
+
+    def plot_comparisons(self):
+        pass
+
     def test1(self):
-        data1 = self.load_file_to_data_structure('test2.txt')
-        print 
-        self.plot_data()
-        
+        self.load_file_to_data_structure()         
+        self.plot_two_axis_of_the_same_case()
+
 
 if __name__ == '__main__':
-    v1 = Visualiser()
-    v1.test1()
+    f1 = 'all_tests_phd_corrections4_20000evals.txt'
+    f2 = 'all_tests_phd_corrections5_20000evals.txt'
+    f3 = 'all_tests_phd_corrections7_20000evals.txt'
+    
+
+    v1 = Visualiser(f2,'case5',1)
+    v1.test1()    
+    
+    v2 = Visualiser(f3,'case7',2)
+    v2.test1()
+
+    v3 = Visualiser(f1,'case4',3)
+    v3.test1()    
+
+    plt.show()
+
+#     plt.show()
