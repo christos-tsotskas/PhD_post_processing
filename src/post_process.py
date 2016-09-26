@@ -6,6 +6,30 @@ Created on 19 Sep 2016
 import numpy as np
 import matplotlib.pyplot as plt
 
+class ComparisonPlot(object):
+    
+    __Visualisers = None
+    
+    def __init__(self, Visualisers):
+        self.__Visualisers = Visualisers
+        print 'received:'+ str( len(self.__Visualisers)) + " visualisers"
+        
+    def plot_to_compare_time_performance(self):
+        fig = plt.figure()
+        ax = plt.gca()
+    
+        for plot in self.__Visualisers:            
+            (x,y) = plot.get_number_of_variables_vs_time()            
+            ax.scatter( x,y , label=plot.get_name())
+        
+#         ax.set_xscale('log')
+        plt.xlabel('number of variables')
+        plt.ylabel('Time(s)')
+        plt.legend(loc=9, ncol=2)
+        plt.grid(True)
+        plt.show()
+        
+
 class Visualiser(object):
     
     __data = None
@@ -19,8 +43,12 @@ class Visualiser(object):
         self.__name = name
         self.__figure_number = figure_number
    
-        
+    def get_data(self):
+        self.load_file_to_data_structure()   
+        return self.__data 
 
+    def get_name(self):
+        return self.__name
 
     def load_file_to_data_structure(self):
         '''
@@ -47,7 +75,12 @@ class Visualiser(object):
                 self.__data[row_index][2] = float(text[2])            
                 row_index += 1
             
-
+    def get_number_of_variables_vs_time(self):
+        self.load_file_to_data_structure()
+        x = self.__data[:][0]
+        y = self.__data[:][1]
+        number_of_variables_vs_time = (x, y)
+        return number_of_variables_vs_time
             
     def plot_two_axis_of_the_same_case(self):
         number_of_variables = self.__data[:,0]
@@ -76,26 +109,46 @@ class Visualiser(object):
     def plot_comparisons(self):
         pass
 
-    def test1(self):
+    def plot_quality_and_time_together(self):
         self.load_file_to_data_structure()         
         self.plot_two_axis_of_the_same_case()
-
-
-if __name__ == '__main__':
+        
+def plot_quality_and_time_together():
     f1 = 'all_tests_phd_corrections4_20000evals.txt'
     f2 = 'all_tests_phd_corrections5_20000evals.txt'
     f3 = 'all_tests_phd_corrections7_20000evals.txt'
     
 
     v1 = Visualiser(f2,'case5',1)
-    v1.test1()    
+    v1.plot_quality_and_time_together()    
     
     v2 = Visualiser(f3,'case7',2)
-    v2.test1()
+    v2.plot_quality_and_time_together()
 
     v3 = Visualiser(f1,'case4',3)
-    v3.test1()    
+    v3.plot_quality_and_time_together()    
 
     plt.show()
 
-#     plt.show()
+def plot_quality():
+    f1 = 'all_tests_phd_corrections4_20000evals.txt'
+    f2 = 'all_tests_phd_corrections5_20000evals.txt'
+    f3 = 'all_tests_phd_corrections7_20000evals.txt'
+    
+
+    v1 = Visualiser(f2,'case5',1)    
+    v2 = Visualiser(f3,'case7',2)
+    v3 = Visualiser(f1,'case4',3)
+
+    collection1 = [v1, v2, v3]
+#     collection1 = [v1, v2]
+#     collection1 = [v1]
+    
+    cp1 = ComparisonPlot(collection1)
+    cp1.plot_to_compare_time_performance()
+    
+    
+    
+
+if __name__ == '__main__':
+    plot_quality()
