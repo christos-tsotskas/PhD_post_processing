@@ -16,12 +16,15 @@ def plot_quality():
     f1 = 'all_tests_phd_corrections4_20000evals.txt'
     f2 = 'all_tests_phd_corrections5_20000evals.txt'
     f3 = 'all_tests_phd_corrections7_20000evals.txt'
+    f4 = 'all_tests_phd_corrections6_20000evals.txt'
+    f5 = 'all_tests_phd_corrections8_20000evals.txt'
+    
+    all_files = [f1, f2, f3, f4, f5]
     
     data1 = DataFrame(pd.read_csv(f1, delim_whitespace=True))
     
     
     
-    exit
     data2 = DataFrame(pd.read_csv(f2, delim_whitespace=True))
 #     data2 = DataFrame(pd.read_csv(f2))
 #     data3 = DataFrame(pd.read_csv(f3))
@@ -39,7 +42,7 @@ def plot_quality():
     
     fig = plt.figure()
     plt.scatter(x1, y1, s=10, c='r', marker="o", label = 'case4')
-    plt.scatter(x2, y2, s=10, c='b', marker="s", label = 'case5')
+    plt.scatter(x2, y2, s=13, c='b', marker="s", label = 'case5')
     
     plt.xlabel('Number of variables')
     plt.ylabel('Time(s)')
