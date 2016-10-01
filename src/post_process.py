@@ -19,8 +19,8 @@ class ComparisonPlot(object):
         ax = plt.gca()
     
         for plot in self.__Visualisers:            
-            (x,y) = plot.get_number_of_variables_vs_time()            
-            ax.scatter( x,y , label=plot.get_name())
+            (x,y1) = plot.get_number_of_variables_vs_time()            
+            ax.scatter( x,y1 , label=plot.get_name())
         
 #         ax.set_xscale('log')
         plt.xlabel('number of variables')
@@ -78,8 +78,8 @@ class Visualiser(object):
     def get_number_of_variables_vs_time(self):
         self.load_file_to_data_structure()
         x = self.__data[:][0]
-        y = self.__data[:][1]
-        number_of_variables_vs_time = (x, y)
+        y1 = self.__data[:][1]
+        number_of_variables_vs_time = (x, y1)
         return number_of_variables_vs_time
             
     def plot_two_axis_of_the_same_case(self):

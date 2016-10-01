@@ -1,4 +1,4 @@
-#number_of_variables	time(s)	HV(20,20)
+#number_of_variables	time(s):	HV
 30	46.313	24719.9
 60	6.55356	5849.05
 120	9.0582	714.42
