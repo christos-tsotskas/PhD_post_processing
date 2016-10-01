@@ -32,7 +32,7 @@ def process_file(case_specifications , selected_column):
     y1 = gb1[selected_column]
     plt.scatter(x, y1, s=12, marker=marker, label = label)
 
-def plot_all_for(type = 'time', test_function_name="ZDT2"):
+def plot_all_for(specifications_of_cases_to_compare, type = 'time', test_function_name="ZDT2"):
     '''
     type: 'time' = time(s):
     type: 'HV' = HyperVolume
@@ -50,17 +50,11 @@ def plot_all_for(type = 'time', test_function_name="ZDT2"):
                     
                     }
     
-    f1 = {'filename':'all_tests_phd_corrections4_20000evals.txt', 'description':'nVar/5', 'mark':'o', 'variables_column_name':"#number_of_variables"}
-    f2 = {'filename':'all_tests_phd_corrections5_20000evals.txt', 'description':'nVar/5', 'mark':'s', 'variables_column_name':"#nVar"}
-    f3 = {'filename':'all_tests_phd_corrections7_20000evals.txt', 'description':'nVar/9', 'mark':'*', 'variables_column_name':"#nVar"}
-    f4 = {'filename':'all_tests_phd_corrections6_20000evals.txt', 'description':'nVar/11', 'mark':'+', 'variables_column_name':"#nVar"}
-    f5 = {'filename':'all_tests_phd_corrections8_20000evals.txt', 'description':'nVar/13', 'mark':'.', 'variables_column_name':"#nVar"}
-    
-    filenames =[f1, f2, f3, f4, f5]
+   
     
     fig = plt.figure()
     
-    for filename in filenames:
+    for filename in specifications_of_cases_to_compare:
         process_file(filename, type_of_plot[type]['column_name'])
 
     plt.xlabel('Number of variables')
@@ -71,5 +65,23 @@ def plot_all_for(type = 'time', test_function_name="ZDT2"):
     plt.legend(loc='upper left')
     plt.show()
     
-plot_all_for(type='time', test_function_name="ZDT2")
-# plot_all_for(type='HV')
+def plot_for_ZDT2():
+    f1 = {'filename':'all_tests_phd_corrections4_20000evals.txt', 'description':'nVar/5', 'mark':'o', 'variables_column_name':"#number_of_variables"}
+    f2 = {'filename':'all_tests_phd_corrections5_20000evals.txt', 'description':'nVar/5', 'mark':'s', 'variables_column_name':"#nVar"}
+    f3 = {'filename':'all_tests_phd_corrections7_20000evals.txt', 'description':'nVar/9', 'mark':'*', 'variables_column_name':"#nVar"}
+    f4 = {'filename':'all_tests_phd_corrections6_20000evals.txt', 'description':'nVar/11', 'mark':'+', 'variables_column_name':"#nVar"}
+    f5 = {'filename':'all_tests_phd_corrections8_20000evals.txt', 'description':'nVar/13', 'mark':'.', 'variables_column_name':"#nVar"}
+    
+    specifications_of_cases_to_compare_for_ZDT2 =[f1, f2, f3, f4, f5]
+    plot_all_for(type='time', test_function_name="ZDT2", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT2)
+    plot_all_for(type='HV', test_function_name="ZDT2", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT2)
+    
+def plot_for_ZDT1():
+    f1 = {'filename':'all_tests_phd_corrections10b_zdt1_20000evals.txt', 'description':'nVar/13', 'mark':'o', 'variables_column_name':"#nVar"}
+
+    specifications_of_cases_to_compare_for_ZDT1 =[f1]
+    plot_all_for(type='time', test_function_name="ZDT1", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT1)
+    plot_all_for(type='HV', test_function_name="ZDT1", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT1)
+
+plot_for_ZDT1()
+    
