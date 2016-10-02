@@ -66,20 +66,24 @@ def plot_all_for(specifications_of_cases_to_compare, type = 'time', test_functio
     plt.show()
     
 def plot_for_ZDT2():
-    f1 = {'filename':'all_tests_phd_corrections4_20000evals.txt', 'description':'nVar/5', 'mark':'o', 'variables_column_name':"#number_of_variables"}
+#     f1 = {'filename':'all_tests_phd_corrections4_20000evals.txt', 'description':'nVar/5', 'mark':'o', 'variables_column_name':"#number_of_variables"}
     f2 = {'filename':'all_tests_phd_corrections5_20000evals.txt', 'description':'nVar/5', 'mark':'s', 'variables_column_name':"#nVar"}
     f3 = {'filename':'all_tests_phd_corrections7_20000evals.txt', 'description':'nVar/9', 'mark':'*', 'variables_column_name':"#nVar"}
     f4 = {'filename':'all_tests_phd_corrections6_20000evals.txt', 'description':'nVar/11', 'mark':'+', 'variables_column_name':"#nVar"}
     f5 = {'filename':'all_tests_phd_corrections8_20000evals.txt', 'description':'nVar/13', 'mark':'.', 'variables_column_name':"#nVar"}
     
-    specifications_of_cases_to_compare_for_ZDT2 =[f1, f2, f3, f4, f5]
+    specifications_of_cases_to_compare_for_ZDT2 =[ f2, f3, f4, f5]
     plot_all_for(type='time', test_function_name="ZDT2", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT2)
     plot_all_for(type='HV', test_function_name="ZDT2", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT2)
     
 def plot_for_ZDT1():
-    f1 = {'filename':'all_tests_phd_corrections10b_zdt1_20000evals.txt', 'description':'nVar/13', 'mark':'o', 'variables_column_name':"#nVar"}
+#     f1 = {'filename':'all_tests_phd_corrections10b_zdt1_20000evals.txt', 'description':'nVar/13a', 'mark':'o', 'variables_column_name':"#nVar"}
+    f2 = {'filename':'all_tests_phd_corrections10e_zdt1_20000evals.txt', 'description':'nVar/13', 'mark':'s', 'variables_column_name':"#nVar"}
+    f3 = {'filename':'all_tests_phd_corrections11_zdt1_20000evals.txt', 'description':'nVar/11', 'mark':'*', 'variables_column_name':"#nVar"}
+    f4 = {'filename':'all_tests_phd_corrections12_zdt1_20000evals.txt', 'description':'nVar/9', 'mark':'+', 'variables_column_name':"#nVar"}
+    f5 = {'filename':'all_tests_phd_corrections13_zdt1_20000evals.txt', 'description':'nVar/5', 'mark':'.', 'variables_column_name':"#nVar"}
 
-    specifications_of_cases_to_compare_for_ZDT1 =[f1]
+    specifications_of_cases_to_compare_for_ZDT1 =[f2, f3, f4, f5]
     plot_all_for(type='time', test_function_name="ZDT1", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT1)
     plot_all_for(type='HV', test_function_name="ZDT1", specifications_of_cases_to_compare=specifications_of_cases_to_compare_for_ZDT1)
 
